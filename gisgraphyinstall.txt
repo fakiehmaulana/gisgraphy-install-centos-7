@@ -1,6 +1,6 @@
 #!/bin/bash
 # ========================================================================================================
-# title          : gisgraphyinstall.sh
+# title          : gisgraphy install
 # description    : Gisgraphy server from a CentOS 7 minimal install
 #                : Please refer to documentation on how to populate the database
 # license        : GPLv3

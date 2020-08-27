@@ -96,7 +96,8 @@ mv /var/lib/pgsql/gisgraphy-5.0-beta3 /var/lib/pgsql/gisgraphy
 # set ownership of folder to postgres user
 chown postgres:postgres -R /var/lib/pgsql/gisgraphy
 
-# running some commands as the postgres user
+# running some commands as the postgres user 
+EDIT USER POSGRESS FIST 
 sudo -i -u postgres bash <<'EOF'
 
 # create the database

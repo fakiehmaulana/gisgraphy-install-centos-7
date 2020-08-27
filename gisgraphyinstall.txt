@@ -156,10 +156,6 @@ EOF
 # change password for user postgres
 echo "postgres:password" | chpasswd
 
-# backup postgres conf
-mv /var/lib/pgsql/10/data/pg_hba.conf /var/lib/pgsql/10/data/pg_hba.conf.backup
-
-
 
 # add password to jdbc.properties
 sed -i '26s/jdbc.password=/jdbc.password=password/' /var/lib/pgsql/gisgraphy/webapps/ROOT/WEB-INF/classes/jdbc.properties

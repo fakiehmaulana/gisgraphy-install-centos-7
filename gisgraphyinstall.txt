@@ -100,6 +100,28 @@ chown postgres:postgres -R /var/lib/pgsql/gisgraphy
 EDIT USER POSGRESS FIST 
 sudo -i -u postgres bash <<'EOF'
 
+# update postgres conf
+cat > /var/lib/pgsql/10/data/pg_hba.conf <<'EOF'
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer
+# IPv4 local connections:
+#host    all             all             127.0.0.1/32            ident
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+#host    all             all             ::1/128                 ident
+host    all             all             ::1/128                 trust
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+#local   replication     all                                     peer
+#host    replication     all             127.0.0.1/32            ident
+#host    replication     all             ::1/128                 ident
+EOF
+
+# restart postgres
+systemctl restart postgresql-10.service
+
 # create the database
 psql -c  "CREATE DATABASE gisgraphy ENCODING = 'UTF8';"
 
@@ -137,27 +159,7 @@ echo "postgres:password" | chpasswd
 # backup postgres conf
 mv /var/lib/pgsql/10/data/pg_hba.conf /var/lib/pgsql/10/data/pg_hba.conf.backup
 
-# update postgres conf
-cat > /var/lib/pgsql/10/data/pg_hba.conf <<'EOF'
-# TYPE  DATABASE        USER            ADDRESS                 METHOD
 
-# "local" is for Unix domain socket connections only
-local   all             all                                     peer
-# IPv4 local connections:
-#host    all             all             127.0.0.1/32            ident
-host    all             all             127.0.0.1/32            md5
-# IPv6 local connections:
-#host    all             all             ::1/128                 ident
-host    all             all             ::1/128                 trust
-# Allow replication connections from localhost, by a user with the
-# replication privilege.
-#local   replication     all                                     peer
-#host    replication     all             127.0.0.1/32            ident
-#host    replication     all             ::1/128                 ident
-EOF
-
-# restart postgres
-systemctl restart postgresql-10.service
 
 # add password to jdbc.properties
 sed -i '26s/jdbc.password=/jdbc.password=password/' /var/lib/pgsql/gisgraphy/webapps/ROOT/WEB-INF/classes/jdbc.properties

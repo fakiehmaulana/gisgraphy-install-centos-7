@@ -197,6 +197,8 @@ chcon -R -t httpd_sys_content_rw_t "/var/log/pgadmin4/"
 chcon -R -t httpd_sys_content_rw_t "/var/lib/pgadmin4/"
 SELINUX=disabled
 
+retore
+psql -U username -d database_name -f objects.sql
 
 
 fix:

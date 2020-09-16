@@ -182,6 +182,11 @@ admin
 
 pgadmin
 https://computingforgeeks.com/how-to-install-pgadmin-on-centos-fedora/
+chown -R apache:apache /var/lib/pgadmin4/*
+chown -R apache:apache /var/log/pgadmin4/*
+sudo chcon -t httpd_sys_rw_content_t /var/log/pgadmin4 -R
+sudo chcon -t httpd_sys_rw_content_t /var/lib/pgadmin4 -R
+
 
 fix:
 Error : An error occurred when processing GeonamesCountryImporter : An error occurred when processing countryInfo.txt : An Error occurred on Line 1 for AD	AND	020	AN	Andorra	Andorra la Vella	468	84000	EU	.ad	EUR	Euro	376	AD###	^(?:AD)*(\d{3})$	ca	3041565	ES,FR	: IllegalArgumentException occurred while calling setter of com.gisgraphy.domain.geoloc.entity.GisFeature.adm; nested exception is org.hibernate.PropertyAccessException: IllegalArgumentException occurred while calling setter of com.gisgraphy.domain.geoloc.entity.Gis

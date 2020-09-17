@@ -27,7 +27,7 @@ yum install -y wget unzip
 cd /root
 
 # download Java Development Kit version 8
-yum install java-1.8.0-openjdk
+yum install -y java-1.8.0-openjdk
 
 # check to see if Oracle Java is now the default
 java -version
@@ -61,7 +61,7 @@ sudo rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-rep
 yum install -y postgresql10 postgresql10-server postgresql10-libs postgresql10-contrib postgresql10-devel
 
 yum --disablerepo="*" --enablerepo="pgdg10" list available
-yum install postgis24_10
+yum install -y postgis24_10
 
 # initialize database
 sudo /usr/pgsql-10/bin/postgresql-10-setup initdb

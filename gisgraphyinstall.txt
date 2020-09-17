@@ -199,6 +199,7 @@ SELINUX=disabled
 
 retore
 psql -U username -d database_name -f objects.sql
+pg_restore -U username -d dbname -1 filename.dump
 
 
 fix:
